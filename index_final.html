@@ -9,9 +9,11 @@
 <div class="container">
     <div class="row header">
         <h1>Handedness and Performance of Baseball Players</h1>
-        <p>A data set containing 1,157 baseball players including their handedness (right or left handed or both), height (in inches), weight (in pounds), batting average, and home runs.</p>
+        <p>A data set of baseball players including their handedness (right or left handed or both), height (in inches), weight (in pounds), batting average, and home runs.</p>
         <p>This visualization contains four plots. For the first three, each plot tries to show the relationship between two continuous variables, colored by the handedness of baseball players. Move your mouse above a particular point on the scatter plot to show the information of a player. You can also click the legend to show or hide players grouped by handedness.</p>
-        <p>We can see that the handedness does not affect the performance of baseball players very much. Most players have a batting average around 0.25, and having a high average does not lead to more home runs. Height has no effect on batting average. Weight does not influence the number of home runs much but overweight players have few home runs.</p>
+        <p>In the first plot, there is a positive relationship between Number of Home Runs and Batting Average, players having many home runs usually have good batting average. However, the top batting average players do not have the best home runs record, possibly because they are not aiming for home runs. Most players have a batting average around 0.25. If a player has a batting average below 0.2, he most likely will have a low number of home runs. Left-handed players are perhaps slightly better with regard to batting average.</p>
+        <p>In the second plot, players with good batting average usually have medium heights. Players that are too high tend to have medium to low batting average.</p>
+        <p>In the third plot, there is a clear indication that players who are good at hitting home runs are of medium weights. Probably because if you are too thin, you don't have enough power, and if you are too heavy, your agility is not good.</p>
     </div>
 
 <div id="my_chart"></div>
@@ -31,12 +33,14 @@
         // First Chart
         var myChart = new dimple.chart(svg, data);
         myChart.setMargins("60px", "30px", "110px", "70px");
-        myChart.addMeasureAxis("x", "HR");
-        myChart.addMeasureAxis("y", "avg");
+        x = myChart.addMeasureAxis("x", "logHR");
+        y = myChart.addMeasureAxis("y", "avg");
         myChart.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend = myChart.addLegend(830, 120, 80, 300);
         myChart.draw();
         myChart.legends = [];
+        x.titleShape.text("log(Number of Home Runs)");
+        y.titleShape.text("Batting Average");
 
         // Creating Legend
         svg.selectAll("title_text")
@@ -49,6 +53,9 @@
             .style("font-size", "10px")
             .style("color", "Black")
             .text(function (d) { return d; });
+
+        // change opacity
+        svg.style("opacity", 0.8);
 
         // Creating Interaction
         var filterValues = dimple.getUniqueValues(data, "handedness");
@@ -78,12 +85,14 @@
         // Second Chart
         var myChart2 = new dimple.chart(svg2, data);
         myChart2.setMargins("60px", "30px", "110px", "70px");
-        myChart2.addMeasureAxis("x", "height");
-        myChart2.addMeasureAxis("y", "avg");
+        x = myChart2.addMeasureAxis("x", "height2");
+        y = myChart2.addMeasureAxis("y", "avg");
         myChart2.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend2 = myChart2.addLegend(830, 120, 80, 300);
         myChart2.draw();
         myChart2.legends = [];
+        x.titleShape.text("Height of Players (60+ inches)");
+        y.titleShape.text("Batting Average");
 
         // Creating Legend
         svg2.selectAll("title_text")
@@ -96,6 +105,9 @@
             .style("font-size", "10px")
             .style("color", "Black")
             .text(function (d) { return d; });
+
+        // change opacity
+        svg2.style("opacity", 0.8);
 
         // Creating Interaction
         var filterValues2 = dimple.getUniqueValues(data, "handedness");
@@ -125,12 +137,14 @@
         // Third Chart
         var myChart3 = new dimple.chart(svg3, data);
         myChart3.setMargins("60px", "30px", "110px", "70px");
-        myChart3.addMeasureAxis("x", "weight");
-        myChart3.addMeasureAxis("y", "HR");
+        x = myChart3.addMeasureAxis("x", "weight2");
+        y = myChart3.addMeasureAxis("y", "HR");
         myChart3.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend3 = myChart3.addLegend(830, 120, 80, 300);
         myChart3.draw();
         myChart3.legends = [];
+        x.titleShape.text("Weight of Players (120+ pounds)");
+        y.titleShape.text("Number of Home Runs");
 
         // Creating Legend
         svg3.selectAll("title_text")
@@ -143,6 +157,9 @@
             .style("font-size", "10px")
             .style("color", "Black")
             .text(function (d) { return d; });
+
+        // change opacity
+        svg3.style("opacity", 0.8);
 
         // Creating Interaction
         var filterValues3 = dimple.getUniqueValues(data, "handedness");
@@ -177,7 +194,7 @@
         x.title = 'Handedness';
 
         var y = myChart4.addMeasureAxis("y", "count");
-        y.title = 'Play Counts';
+        y.title = 'Number of Players';
         var mySeries = myChart4.addSeries(null, dimple.plot.bar);
         mySeries.aggregate = dimple.aggregateMethod.sum;
         myChart4.draw();

@@ -11,7 +11,7 @@ forums
 N/A
 
 blog posts
-N/A
+http://www.storytellingwithdata.com/blog/2014/04/exploratory-vs-explanatory-analysis
 
 github repositories
 https://github.com/PMSI-AlignAlytics/dimple/wiki/dimple.chart

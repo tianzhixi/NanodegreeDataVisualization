@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+
+<body>
+<div class="container">
+    <div class="row header">
+        <h1>Handedness and Performance of Baseball Players</h1>
+        <p>A data set containing 1,157 baseball players including their handedness (right or left handed or both), height (in inches), weight (in pounds), batting average, and home runs.</p>
+        <p>This visualization contains three plots, each tries to show the relationship between two continuous variables, colored by the handedness of baseball players. Move your mouse above a particular point on the scatter plot to show the information of a player. You can also click the legend to show or hide players grouped by handedness.</p>
+        <p>We can see that the handedness does not affect the performance of baseball players very much. Most players have a batting average around 0.25, and having a high average does not lead to more home runs. Height has no effect on batting average. Weight does not influence the number of home runs much but overweight players have few home runs.</p>
+    </div>
+
+<div id="my_chart"></div>
+<div id="my_chart2"></div>
+<div id="my_chart3"></div>
+</div>
+
+<script type="text/javascript">
+  d3.csv("baseball_data.csv", function(data){
+
+        var svg = dimple.newSvg("#my_chart", 930, 615);
+        var svg2 = dimple.newSvg("#my_chart2", 930, 615);
+        var svg3 = dimple.newSvg("#my_chart3", 930, 615);
+
+        // First Chart
+        var myChart = new dimple.chart(svg, data);
+        myChart.setMargins("60px", "30px", "110px", "70px");
+        myChart.addMeasureAxis("x", "HR");
+        myChart.addMeasureAxis("y", "avg");
+        myChart.addSeries(["name", "handedness"], dimple.plot.bubble);
+        var myLegend = myChart.addLegend(830, 120, 80, 300);
+        myChart.draw();
+        myChart.legends = [];
+
+        // Creating Legend
+        svg.selectAll("title_text")
+          .data(["Click legend to","show/hide handedness"])
+          .enter()
+          .append("text")
+            .attr("x", 800)
+            .attr("y", function (d, i) { return 90 + i * 14; })
+            .style("font-family", "sans-serif")
+            .style("font-size", "10px")
+            .style("color", "Black")
+            .text(function (d) { return d; });
+
+        // Creating Interaction
+        var filterValues = dimple.getUniqueValues(data, "handedness");
+
+        myLegend.shapes.selectAll("rect")
+          .on("click", function (e) {
+            var hide = false;
+            var newFilters = [];
+            filterValues.forEach(function (f) {
+              if (f === e.aggField.slice(-1)[0]) {
+                hide = true;
+              } else {
+                newFilters.push(f);
+              }
+            });
+            if (hide) {
+              d3.select(this).style("opacity", 0.2);
+            } else {
+              newFilters.push(e.aggField.slice(-1)[0]);
+              d3.select(this).style("opacity", 0.8);
+            }
+            filterValues = newFilters;
+            myChart.data = dimple.filterData(data, "handedness", filterValues);
+            myChart.draw(800);
+          });
+
+        // Second Chart
+        var myChart2 = new dimple.chart(svg2, data);
+        myChart2.setMargins("60px", "30px", "110px", "70px");
+        myChart2.addMeasureAxis("x", "height");
+        myChart2.addMeasureAxis("y", "avg");
+        myChart2.addSeries(["name", "handedness"], dimple.plot.bubble);
+        var myLegend2 = myChart2.addLegend(830, 120, 80, 300);
+        myChart2.draw();
+        myChart2.legends = [];
+
+        // Creating Legend
+        svg2.selectAll("title_text")
+          .data(["Click legend to","show/hide handedness"])
+          .enter()
+          .append("text")
+            .attr("x", 800)
+            .attr("y", function (d, i) { return 90 + i * 14; })
+            .style("font-family", "sans-serif")
+            .style("font-size", "10px")
+            .style("color", "Black")
+            .text(function (d) { return d; });
+
+        // Creating Interaction
+        var filterValues2 = dimple.getUniqueValues(data, "handedness");
+
+        myLegend2.shapes.selectAll("rect")
+          .on("click", function (e) {
+            var hide2 = false;
+            var newFilters2 = [];
+            filterValues2.forEach(function (f) {
+              if (f === e.aggField.slice(-1)[0]) {
+                hide2 = true;
+              } else {
+                newFilters2.push(f);
+              }
+            });
+            if (hide2) {
+              d3.select(this).style("opacity", 0.2);
+            } else {
+              newFilters2.push(e.aggField.slice(-1)[0]);
+              d3.select(this).style("opacity", 0.8);
+            }
+            filterValues2 = newFilters2;
+            myChart2.data = dimple.filterData(data, "handedness", filterValues2);
+            myChart2.draw(1800);
+          });
+
+        // Third Chart
+        var myChart3 = new dimple.chart(svg3, data);
+        myChart3.setMargins("60px", "30px", "110px", "70px");
+        myChart3.addMeasureAxis("x", "weight");
+        myChart3.addMeasureAxis("y", "HR");
+        myChart3.addSeries(["name", "handedness"], dimple.plot.bubble);
+        var myLegend3 = myChart3.addLegend(830, 120, 80, 300);
+        myChart3.draw();
+        myChart3.legends = [];
+
+        // Creating Legend
+        svg3.selectAll("title_text")
+          .data(["Click legend to","show/hide handedness"])
+          .enter()
+          .append("text")
+            .attr("x", 800)
+            .attr("y", function (d, i) { return 90 + i * 14; })
+            .style("font-family", "sans-serif")
+            .style("font-size", "10px")
+            .style("color", "Black")
+            .text(function (d) { return d; });
+
+        // Creating Interaction
+        var filterValues3 = dimple.getUniqueValues(data, "handedness");
+
+        myLegend3.shapes.selectAll("rect")
+          .on("click", function (e) {
+            var hide3 = false;
+            var newFilters3 = [];
+            filterValues3.forEach(function (f) {
+              if (f === e.aggField.slice(-1)[0]) {
+                hide3 = true;
+              } else {
+                newFilters3.push(f);
+              }
+            });
+            if (hide3) {
+              d3.select(this).style("opacity", 0.2);
+            } else {
+              newFilters3.push(e.aggField.slice(-1)[0]);
+              d3.select(this).style("opacity", 0.8);
+            }
+            filterValues3 = newFilters3;
+            myChart3.data = dimple.filterData(data, "handedness", filterValues3);
+            myChart3.draw(2800);
+          });
+    });
+
+</script>
+</body>
+</html>

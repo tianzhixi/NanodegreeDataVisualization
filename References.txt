@@ -1,0 +1,18 @@
+Web sites
+https://docs.google.com/document/d/1w7KhqotVi5eoKE3I_AZHbsxdr-NmcWsLTIiZrpxWx4w/pub?embedded=true
+http://alignedleft.com/tutorials/d3
+http://dimplejs.org/advanced_examples_viewer.html?id=advanced_interactive_legends
+https://developer.chrome.com/devtools/docs/console
+
+books
+http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_setting_up_a_web_server
+
+forums
+N/A
+
+blog posts
+N/A
+
+github repositories
+https://github.com/PMSI-AlignAlytics/dimple/wiki/dimple.chart
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet

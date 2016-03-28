@@ -16,7 +16,7 @@ The feedbacks I received from my colleagues provided a few recommendations:
 3. Some outliers in the data, for example, individuals with the height of 145 in, or both the batting average and home runs are 0.
 4. Statistical analysis for testing whether handedness is significant?
 
-My response are:
+My responses are:
 1. I made a new histogram to show the player counts by handedness.
 2. Dimplejs doesn't have the functionality to fit a regression line or loess line.
 3. I removed the outliers.
@@ -29,7 +29,19 @@ The feedbacks I received from the Udacity tutor helped me improve my visualizati
 2. For the first chart may be useful to use log x-axis -- it will allow spreading data points more evenly and easier to make comparisons.
 3. There is missing units for axes, it is unclear what exactly each axis shows. Also, it may be great to add some explanations for used terms.
 
-I made all the suggested changes and finished my final visualization.
+I made all the suggested changes and finished my third visualization.
+
+A second feedback from the Udacity tutor included suggestions:
+1. Axis labeling a little bit confusing, I can't figure out what "Height of Players (60+ inches)" and number mean. Is it means that the reader has to do mental calc and add 60 to every tick on axis? If so, it is highly confusing and distracting.
+2. Also, please provide units directly on the chart and add titles to charts.
+3. The last thing, charts still look a little bit overplotted, please reduce opacity further and try to use more advanced techniques to deal with it, like adding jitter.
+
+My responses are:
+1. I changed the axes to the original numbers.
+2. I added titles to the charts.
+3. I reduced the opacity further. As for jitter, I couldn't figure out how to do that in Dimplejs, sorry.
+
+Thus I have the final version of visualization.
 
 
 Feedbacks
@@ -74,12 +86,18 @@ Handedness does not affect stats that much.
 5. Is there something you don't understand in the graphic?
 What does it mean to have a batting average of 0? There were a few individuals with this recorded.
 
-Feedback from Udacity tutor
+First Feedback from Udacity tutor
 ------
 1. Charts are severely overplotted. It may be useful to change an opacity of points to show such a lot of them on one chart.
 2. For the first chart may be useful to use log x-axis -- it will allow spreading data points more evenly and easier to make comparisons.
 3. There is missing units for axes, it is unclear what exactly each axis shows. Also, it may be great to add some explanations for used terms.
 
+
+Second Feedback from Udacity tutor
+------
+1. Axis labeling a little bit confusing, I can't figure out what "Height of Players (60+ inches)" and number mean. Is it means that the reader has to do mental calc and add 60 to every tick on axis? If so, it is highly confusing and distracting.
+2. Also, please provide units directly on the chart and add titles to charts.
+3. The last thing, charts still look a little bit overplotted, please reduce opacity further and try to use more advanced techniques to deal with it, like adding jitter.
 
 Resources
 ===========

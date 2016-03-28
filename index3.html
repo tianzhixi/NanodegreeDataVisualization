@@ -35,7 +35,7 @@
         myChart.setMargins("60px", "30px", "110px", "70px");
         x = myChart.addMeasureAxis("x", "logHR");
         y = myChart.addMeasureAxis("y", "avg");
-        var mySeries = myChart.addSeries(["name", "handedness"], dimple.plot.bubble);
+        myChart.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend = myChart.addLegend(830, 120, 80, 300);
         myChart.draw();
         myChart.legends = [];
@@ -55,16 +55,7 @@
             .text(function (d) { return d; });
 
         // change opacity
-        svg.style("opacity", 0.6);
-
-        // adding title to the chart
-        svg.append("text")
-          .attr("x", 500)
-          .attr("y", 20)
-          .style("text-anchor", "middle")
-          .style("font-family", "sans-serif")
-          .style("font-weight", "bold")
-          .text("Relationship between log(Number of Home Runs) and Batting Average");
+        svg.style("opacity", 0.8);
 
         // Creating Interaction
         var filterValues = dimple.getUniqueValues(data, "handedness");
@@ -94,13 +85,13 @@
         // Second Chart
         var myChart2 = new dimple.chart(svg2, data);
         myChart2.setMargins("60px", "30px", "110px", "70px");
-        x = myChart2.addMeasureAxis("x", "height");
+        x = myChart2.addMeasureAxis("x", "height2");
         y = myChart2.addMeasureAxis("y", "avg");
         myChart2.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend2 = myChart2.addLegend(830, 120, 80, 300);
         myChart2.draw();
         myChart2.legends = [];
-        x.titleShape.text("Height of Players (inches)");
+        x.titleShape.text("Height of Players (60+ inches)");
         y.titleShape.text("Batting Average");
 
         // Creating Legend
@@ -116,16 +107,7 @@
             .text(function (d) { return d; });
 
         // change opacity
-        svg2.style("opacity", 0.6);
-
-        // adding title to the chart
-        svg2.append("text")
-          .attr("x", 500)
-          .attr("y", 20)
-          .style("text-anchor", "middle")
-          .style("font-family", "sans-serif")
-          .style("font-weight", "bold")
-          .text("Relationship between Height (inches) and Batting Average");
+        svg2.style("opacity", 0.8);
 
         // Creating Interaction
         var filterValues2 = dimple.getUniqueValues(data, "handedness");
@@ -155,13 +137,13 @@
         // Third Chart
         var myChart3 = new dimple.chart(svg3, data);
         myChart3.setMargins("60px", "30px", "110px", "70px");
-        x = myChart3.addMeasureAxis("x", "weight");
+        x = myChart3.addMeasureAxis("x", "weight2");
         y = myChart3.addMeasureAxis("y", "HR");
         myChart3.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend3 = myChart3.addLegend(830, 120, 80, 300);
         myChart3.draw();
         myChart3.legends = [];
-        x.titleShape.text("Weight of Players (pounds)");
+        x.titleShape.text("Weight of Players (120+ pounds)");
         y.titleShape.text("Number of Home Runs");
 
         // Creating Legend
@@ -177,16 +159,7 @@
             .text(function (d) { return d; });
 
         // change opacity
-        svg3.style("opacity", 0.6);
-
-        // adding title to the chart
-        svg3.append("text")
-          .attr("x", 500)
-          .attr("y", 20)
-          .style("text-anchor", "middle")
-          .style("font-family", "sans-serif")
-          .style("font-weight", "bold")
-          .text("Relationship between Weight (pounds) and Home Runs");
+        svg3.style("opacity", 0.8);
 
         // Creating Interaction
         var filterValues3 = dimple.getUniqueValues(data, "handedness");

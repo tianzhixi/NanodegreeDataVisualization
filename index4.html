@@ -10,19 +10,16 @@
     <div class="row header">
         <h1>Handedness and Performance of Baseball Players</h1>
         <p>A data set of baseball players including their handedness (right or left handed or both), height (in inches), weight (in pounds), batting average, and home runs.</p>
-        <p>This visualization contains five plots. For the first three, each plot tries to show the relationship between two continuous variables, colored by the handedness of baseball players. Move your mouse above a particular point on the scatter plot to show the information of a player. You can also click the legend to show or hide players grouped by handedness.</p>
+        <p>This visualization contains four plots. For the first three, each plot tries to show the relationship between two continuous variables, colored by the handedness of baseball players. Move your mouse above a particular point on the scatter plot to show the information of a player. You can also click the legend to show or hide players grouped by handedness.</p>
         <p>In the first plot, there is a positive relationship between Number of Home Runs and Batting Average, players having many home runs usually have good batting average. However, the top batting average players do not have the best home runs record, possibly because they are not aiming for home runs. Most players have a batting average around 0.25. If a player has a batting average below 0.2, he most likely will have a low number of home runs. Left-handed players are perhaps slightly better with regard to batting average.</p>
-        <p>In the second plot, players with good batting average usually have medium heights.</p>
+        <p>In the second plot, players with good batting average usually have medium heights. Players that are too high tend to have medium to low batting average.</p>
         <p>In the third plot, there is a clear indication that players who are good at hitting home runs are of medium weights. Probably because if you are too thin, you don't have enough power, and if you are too heavy, your agility is not good.</p>
-        <p>The fourth plot is a histogram trying to show the numbers of players according to different handedness.</p>
-        <p>The fifth plot is a histogram of mean batting averages of groups according to different handedness.</p>
     </div>
 
 <div id="my_chart"></div>
 <div id="my_chart2"></div>
 <div id="my_chart3"></div>
 <div id="my_chart4"></div>
-<div id="my_chart5"></div>
 </div>
 
 <script type="text/javascript">
@@ -32,18 +29,17 @@
         var svg2 = dimple.newSvg("#my_chart2", 930, 615);
         var svg3 = dimple.newSvg("#my_chart3", 930, 615);
         var svg4 = dimple.newSvg("#my_chart4", 930, 615);
-        var svg5 = dimple.newSvg("#my_chart5", 930, 615);
 
         // First Chart
         var myChart = new dimple.chart(svg, data);
         myChart.setMargins("60px", "30px", "110px", "70px");
-        x = myChart.addLogAxis("x", "HR");
+        x = myChart.addMeasureAxis("x", "logHR");
         y = myChart.addMeasureAxis("y", "avg");
         var mySeries = myChart.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend = myChart.addLegend(830, 120, 80, 300);
         myChart.draw();
         myChart.legends = [];
-        x.titleShape.text("Number of Home Runs");
+        x.titleShape.text("log(Number of Home Runs)");
         y.titleShape.text("Batting Average");
 
         // Creating Legend
@@ -69,17 +65,6 @@
           .style("font-family", "sans-serif")
           .style("font-weight", "bold")
           .text("Relationship between log(Number of Home Runs) and Batting Average");
-
-        /* not needed now since I used addLogAxis
-        // adding note for the 0 log(HR) points
-        svg.append("text")
-          .attr("x", 250)
-          .attr("y", 450)
-          .style("text-anchor", "middle")
-          .style("font-family", "sans-serif")
-          .style("font-size", "12px")
-          .style("color", "Black")
-          .text("Points on the Y axis mean 0 Home Runs, since log(0) does not exit.");*/
 
         // Creating Interaction
         var filterValues = dimple.getUniqueValues(data, "handedness");
@@ -110,10 +95,6 @@
         var myChart2 = new dimple.chart(svg2, data);
         myChart2.setMargins("60px", "30px", "110px", "70px");
         x = myChart2.addMeasureAxis("x", "height");
-        // limit the x axis
-        x.overrideMin = 60;
-        x.overrideMax = 80;
-
         y = myChart2.addMeasureAxis("y", "avg");
         myChart2.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend2 = myChart2.addLegend(830, 120, 80, 300);
@@ -175,10 +156,6 @@
         var myChart3 = new dimple.chart(svg3, data);
         myChart3.setMargins("60px", "30px", "110px", "70px");
         x = myChart3.addMeasureAxis("x", "weight");
-        // limit the x axis
-        x.overrideMin = 140;
-        x.overrideMax = 240;
-
         y = myChart3.addMeasureAxis("y", "HR");
         myChart3.addSeries(["name", "handedness"], dimple.plot.bubble);
         var myLegend3 = myChart3.addLegend(830, 120, 80, 300);
@@ -236,50 +213,18 @@
             myChart3.draw(2800);
           });
 
-
-        // Histogram of Players According to Handedness
+        // Histogram
         var myChart4 = new dimple.chart(svg4, data);
         myChart4.setMargins("60px", "30px", "110px", "70px");
         var x = myChart4.addCategoryAxis("x", "handedness");
         x.addOrderRule(["R", "L", "B"])
         x.title = 'Handedness';
 
-        // adding title to the chart
-        svg4.append("text")
-          .attr("x", 500)
-          .attr("y", 20)
-          .style("text-anchor", "middle")
-          .style("font-family", "sans-serif")
-          .style("font-weight", "bold")
-          .text("Histogram of Players According to Handedness");
-
         var y = myChart4.addMeasureAxis("y", "count");
         y.title = 'Number of Players';
         var mySeries = myChart4.addSeries(null, dimple.plot.bar);
         mySeries.aggregate = dimple.aggregateMethod.sum;
         myChart4.draw();
-
-        // Histogram of Batting Average According to Handedness
-        var myChart5 = new dimple.chart(svg5, data);
-        myChart5.setMargins("60px", "30px", "110px", "70px");
-        var x = myChart5.addCategoryAxis("x", "handedness");
-        x.addOrderRule(["R", "L", "B"])
-        x.title = 'Handedness';
-
-        // adding title to the chart
-        svg5.append("text")
-          .attr("x", 500)
-          .attr("y", 20)
-          .style("text-anchor", "middle")
-          .style("font-family", "sans-serif")
-          .style("font-weight", "bold")
-          .text("Histogram of Batting Average According to Handedness");
-
-        var y = myChart5.addMeasureAxis("y", "avg");
-        y.title = 'Mean Batting Average';
-        var mySeries = myChart5.addSeries(null, dimple.plot.bar);
-        mySeries.aggregate = dimple.aggregateMethod.avg;
-        myChart5.draw();
     });
 
 </script>

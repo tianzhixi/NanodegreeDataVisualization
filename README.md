@@ -41,7 +41,28 @@ My responses are:
 2. I added titles to the charts.
 3. I reduced the opacity further. As for jitter, I couldn't figure out how to do that in Dimplejs, sorry.
 
-Thus I have the final version of visualization.
+So I have the fourth version of visualization.
+
+A third feedback from the Udacity tutor included required changes:
+1. I would definitely limit the x-axis ranges on the height and weight charts so that they are easier to see. For example, height only has values between approximately 60 and 80 inches. Dimple can limit these axes for you.
+2. In the home runs versus batting average chart, there are a lot of values at an x-axis value of 0. Log(0) does not exist. I would either make a note somewhere on the visualization telling people that since log(0) doesn't exist, those values are just home runs.
+3. The fourth chart still needs a chart title and an explanation of what it represents.
+
+and optional changes and ideas:
+4. Many people won't understand how to convert the numbers on the log() based x-axis to actual home runs. Dimple has functionality to make a log axis with myAxis.addLogAxis. So code like x.addLogAxis("x", "HR") will make a log based x-axis that will at least be somewhat easier for people to understand.
+5. I highly encourage taking summary statistics and/or plotting trend lines instead of plotting all of the data points.
+6. Another idea to consider is how many data points there are on the low and high end of the weight and height ranges.
+
+
+My responses are:
+1. I used the overrideMin and overrideMax properties to limit the X axes for height and weight, making the trends easier to see.
+2. I used the x.addLogAxis("x", "HR") function to keep the x axis in the original unit yet still separate the points quite a bit. In this case I don't need to add the note for the 0 home run points.
+3. I added titles and explanations to all the charts.
+4. I used the aggregate method to plot a histogram comparing the mean batting averages for different handedness. I still want to keep the scatter plot therefore I did not switch to line plot.
+5. I remove the comment saying "Players that are too high tend to have medium to low batting average" since there are only 5 points with height greater than 78 inches.
+
+Thus I have the final version of my visualization.
+
 
 
 Feedbacks
@@ -98,6 +119,18 @@ Second Feedback from Udacity tutor
 1. Axis labeling a little bit confusing, I can't figure out what "Height of Players (60+ inches)" and number mean. Is it means that the reader has to do mental calc and add 60 to every tick on axis? If so, it is highly confusing and distracting.
 2. Also, please provide units directly on the chart and add titles to charts.
 3. The last thing, charts still look a little bit overplotted, please reduce opacity further and try to use more advanced techniques to deal with it, like adding jitter.
+
+
+Third Feedback from Udacity tutor
+------
+1. I would definitely limit the x-axis ranges on the height and weight charts so that they are easier to see. For example, height only has values between approximately 60 and 80 inches. Dimple can limit these axes for you.
+2. In the home runs versus batting average chart, there are a lot of values at an x-axis value of 0. Log(0) does not exist. I would either make a note somewhere on the visualization telling people that since log(0) doesn't exist, those values are just home runs.
+3. The fourth chart still needs a chart title and an explanation of what it represents. It might seem obvious what this chart represents, but remember that people seeing this visualization will have never seen this data set before and won't know where it comes from.
+4. Many people won't understand how to convert the numbers on the log() based x-axis to actual home runs. Dimple has functionality to make a log axis with myAxis.addLogAxis. So code like x.addLogAxis("x", "HR") will make a log based x-axis that will at least be somewhat easier for people to understand.
+5. I highly encourage taking summary statistics and/or plotting trend lines instead of plotting all of the data points.
+6. Another idea to consider is how many data points there are on the low and high end of the weight and height ranges.
+
+
 
 Resources
 ===========
